@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Share My Location</title>
+</head>
+
+<body>
+
+    <h1>Share Your Location</h1>
+
+    <button onclick="getLocation()">
+        Share Location
+    </button>
+
+    <p id="result"></p>
+
+    <script>
+
+        function getLocation() {
+
+            if (navigator.geolocation) {
+
+                navigator.geolocation.getCurrentPosition(
+                    showLocation,
+                    showError
+                );
+
+            } else {
+
+                document.getElementById("result").innerHTML =
+                    "Location is not supported.";
+
+            }
+        }
+
+
+        function showLocation(position) {
+
+            let latitude = position.coords.latitude;
+
+            let longitude = position.coords.longitude;
+
+
+            let googleMaps =
+                "https://www.google.com/maps?q=" +
+                latitude + "," + longitude;
+
+
+            document.getElementById("result").innerHTML =
+
+                "Latitude: " + latitude +
+                "<br>" +
+
+                "Longitude: " + longitude +
+                "<br><br>" +
+
+                '<a href="' + googleMaps +
+                '" target="_blank">' +
+
+                "Open in Google Maps" +
+
+                "</a>";
+        }
+
+
+        function showError(error) {
+
+            document.getElementById("result").innerHTML =
+                "Location permission was not granted.";
+
+        }
+
+    </script>
+
+</body>
+</html>

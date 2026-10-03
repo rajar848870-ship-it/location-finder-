@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Location Test</title>
+</head>
+
+<body>
+
+    <h1>Share Your Location</h1>
+
+    <button onclick="getLocation()">Share Location</button>
+
+    <p id="result">Click the button.</p>
+
+    <script>
+
+        function getLocation() {
+
+            document.getElementById("result").innerHTML =
+                "Getting your location...";
+
+            navigator.geolocation.getCurrentPosition(
+
+                function(position) {
+
+                    let latitude = position.coords.latitude;
+                    let longitude = position.coords.longitude;
+
+                    document.getElementById("result").innerHTML =
+                        "Latitude: " + latitude +
+                        "<br>Longitude: " + longitude +
+                        "<br><br>" +
+                        '<a href="https://www.google.com/maps?q=' +
+                        latitude + ',' + longitude +
+                        '" target="_blank">Open in Google Maps</a>';
+                },
+
+                function(error) {
+
+                    document.getElementById("result").innerHTML =
+                        "Error: " + error.message;
+                }
+            );
+        }
+
+    </script>
+
+</body>
+</html>
